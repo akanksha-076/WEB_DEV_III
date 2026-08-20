@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "GOA BEACH ESCAPE",
+    "destination": "GOA",
+    "days": 5,
+    "price": 12000
+  },
+  {
+    "id": 2,
+    "name": "MANALI ADV",
+    "destination": "MANALI",
+    "days": 4,
+    "price": 11000
+  },
+  {
+    "id": 3,
+    "name": "sdff",
+    "destination": "ddfvdv",
+    "days": 4,
+    "price": 15000
+  }
+]
