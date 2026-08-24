@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Akanksha Sharma",
+    "email": "akanksha@example.com",
+    "password": "test1234",
+    "phone": "9876543210",
+    "bookedTour": 1
+  },
+  {
+    "id": 2,
+    "name": "Rohan Verma",
+    "email": "rohan@example.com",
+    "password": "test1234",
+    "phone": "9123456780",
+    "bookedTour": 2
+  },
+  {
+    "id": 3,
+    "name": "Priya Singh",
+    "email": "priya@example.com",
+    "password": "test1234",
+    "phone": "9988776655",
+    "bookedTour": 3
+  }
+]

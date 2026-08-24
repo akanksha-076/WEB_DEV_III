@@ -45,6 +45,16 @@ const getAllTours = (req, res) => {
   res.json(tours);
 };
 //getbyquery v implement krna hai.
+const getTourByQuery = (req, res) => {
+  const query = req.query;
+  const tours = tourModel.getByQuery(query);
+  if (tours.length > 0) {
+    res.status(200).json(tours);
+  } else {
+    res.status(404).json({ message: 'No tours found matching the query' });
+  }
+};
+
 
 const getTourById = (req, res) => {
   const id = parseInt(req.params.id, 10);
@@ -82,4 +92,4 @@ const deleteTour = (req, res) => {
   }
 };
 
-module.exports = { getAllTours, getTourById, createTour, updateTour, deleteTour };
+module.exports = { getAllTours, getTourById, getTourByQuery, createTour, updateTour, deleteTour };
