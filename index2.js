@@ -14,3 +14,6 @@ app.post("/submit", (req, res) => {
 app.listen(3000, () => {
     console.log("Server is running");
 });
+
+// usemodel,usercontroller,userrouter,user.json ye 
+// srai files banani hai and sam same rakhna hai bss user ka schema change krna hai and  impliment krni hi app.use/user/user route 
