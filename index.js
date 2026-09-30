@@ -29,7 +29,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const password = process.env.password;
 
-const uri = "mongodb://a31695132_db_user:password@ac-b8xba4p-shard-00-00.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-01.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-02.hpq96sk.mongodb.net:27017/?ssl=true&replicaSet=atlas-veqzzb-shard-0&authSource=admin&appName=Cluster0";
+const uri = `mongodb://a31695132_db_user:${password}@ac-b8xba4p-shard-00-00.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-01.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-02.hpq96sk.mongodb.net:27017/?ssl=true&replicaSet=atlas-veqzzb-shard-0&authSource=admin&appName=Cluster0`;
 
 const client = new MongoClient(uri);
 
