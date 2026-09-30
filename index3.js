@@ -13,3 +13,5 @@
 // models k aandr data.js file
 // create a json notes with key id title and description we will use it in another file so export this file 
 //go to controller create a file nodeController.js  create a functoin name get notes and expport it
+//create another file in routes with nmae nodeRoutes write router.get("/notes",getNotes
+//)got to index.js and write app.use ("/api",noteRoute )
