@@ -36,6 +36,8 @@ db.students.aggregate([
   }
 ])
 
+=======================HOME WORK========================
+
 
 ----------create a collection named employee and insert the following documents into it
  db.employee.insertMany([
@@ -98,3 +100,13 @@ db.students.aggregate([
   }
 
 ])
+
+
+db.students.aggregate([
+  {
+    $unwind: "$skills"
+  },{
+    $group: {
+       _id: "$skills",
+        count: { $sum: 1 } }
+    }])
