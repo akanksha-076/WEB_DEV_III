@@ -21,3 +21,80 @@
     "price": 15000
   }
 ]
+
+
+
+db.students.aggregate([
+  {
+    $group: {
+      _id: "$course",
+      averageAge:{$avg: "$age"}
+    }
+  },
+  {
+    $sort: { averageAge: -1 }
+  }
+])
+
+
+----------create a collection named employee and insert the following documents into it
+ db.employee.insertMany([
+  { name: "Aman", dept: "IT", salary: 50000, age: 22 },
+  { name: "Riya", dept: "HR", salary: 40000, age: 24 },
+  { name: "Rahul", dept: "IT", salary: 60000, age: 25 },
+  { name: "Priya", dept: "HR", salary: 45000, age: 23 },
+  { name: "Neha", dept: "IT", salary: 70000, age: 26 }
+])
+
+----------display all employee------------------------------------
+db.employee.find()
+
+------------FIND department wise average salary--------------------
+db.employee.aggregate([
+  {
+    $group: {
+      _id: "$dept",
+      averageSalary: { $avg: "$salary" }
+    }
+  }])
+
+-----------find the second highest salary-------------------------
+db.employee.aggregate([
+  {
+    $sort: { salary: -1 }},
+    {$group:{_id:"$salary"}},
+    {$skip:1},
+    {$limit:1}
+])
+
+-----------find the second highest salary--------------------------
+  
+db.employee.aggregate([
+  {
+    $sort: { salary: -1 }
+  },
+  {
+    $group: {
+      _id: null,
+      salaries: { $push: "$salary" }
+    }
+  },
+  {
+    $project: {
+      secondHighestSalary: { $arrayElemAt: ["$salaries", 1] }
+    }
+  }
+])
+
+
+
+================CLASS WORK==========================
+db.students.aggregate([
+  {
+    $match: { age: { $gt: 20 } }
+  },
+  {
+    $count:"total_students"
+  }
+
+])
