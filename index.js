@@ -1,46 +1,47 @@
-// const express = require('express');
-// const app = express();
-// const port=3000;
-// app.use(express.json());
+require('dotenv').config();
 
-// const tourRouter=require('./router/tourRouter.js')
+const express = require('express');
+const connectDB = require('./server');
+const tourRouter = require('./router/tourRouter');
 
-// app.use('/tours',tourRouter);
+const app = express();
+const port = process.env.PORT || 3000;
 
-// app.listen(port, () => {
-//     console.log(`sever runnig on port ${port}`)
-// });
-// ========================================================
+app.use(express.json());
+app.use('/tours', tourRouter);
 
-// const express = require('express');
-// const app = express();
-// const tourRouter = require('./router/tourRouter');
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
 
-// app.use(express.json());
+  if (err.name === 'ValidationError' || err.name === 'CastError') {
+    return res.status(400).json({ message: err.message });
+  }
 
-// app.use('/tours', tourRouter);
+  if (err.code === 11000) {
+    return res.status(409).json({ message: 'A tour with that value already exists' });
+  }
 
-// app.listen(3000, () => {
-//   console.log('Server is running on http://localhost:3000');
-// });
+  const status = err.status || err.statusCode || 500;
+  if (status >= 500) {
+    console.error(err);
+  }
+  res.status(status).json({
+    message: status >= 500 ? 'Internal server error' : err.message
+  });
+});
 
-import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
-dotenv.config();
-const password = process.env.password;
-
-const uri = `---------------:${password}@ac-b8xba4p-shard-00-00.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-01.hpq96sk.mongodb.net:27017,ac-b8xba4p-shard-00-02.hpq96sk.mongodb.net:27017/?ssl=true&replicaSet=atlas-veqzzb-shard-0&authSource=admin&appName=Cluster0`;
-
-const client = new MongoClient(uri);
-
-export async function connectToMongoDB() {
+async function startServer() {
   try {
-    await client.connect();
-    console.log("You successfully connected to MongoDB!");
-    return client;
+    await connectDB();
+    app.listen(port, () => {
+      console.log(`Server is running at http://localhost:${port}`);
+    });
   } catch (err) {
-    console.error("Connection error:", err);
+    console.error('Unable to start the server:', err);
+    process.exitCode = 1;
   }
 }
 
-connectToMongoDB();
+startServer();

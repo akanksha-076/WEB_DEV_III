@@ -50,10 +50,10 @@ const tourSchema=new mongoose.Schema({
         max:[5,"rating must be less than or equal to 5"]
     },
     isActive:{
+        type:Boolean,
         default:true,
     }
     
 })
 module.exports=mongoose.model("Tour",tourSchema);
-
 
